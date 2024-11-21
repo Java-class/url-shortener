@@ -31,7 +31,7 @@ public class UrlServiceImpl implements UrlService {
 
     @Override
     public UrlDto getOriginalUrl(String shortUrl) throws DataNotFoundException {
-        return urlRepository.findByShortUrl(shortUrl)
+        return urlRepository.findByShortUrl(appConfig.getBaseUrl() + shortUrl)
                 .map(urlMapper::toUrlDto)
                 .orElseThrow(DataNotFoundException::new);
     }
