@@ -1,5 +1,6 @@
 package ir.javaclass.demo.controller;
 
+import ir.javaclass.demo.exception.DataNotFoundException;
 import ir.javaclass.demo.model.dto.UrlDto;
 import ir.javaclass.demo.service.UrlService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class UrlController {
     }
 
     @GetMapping("/{shortUrl}")
-    public ResponseEntity<String> getOriginalUrl(@PathVariable String shortUrl) {
+    public ResponseEntity<String> getOriginalUrl(@PathVariable String shortUrl) throws DataNotFoundException {
         var urlDto = urlService.getOriginalUrl(shortUrl);
         return ResponseEntity.ok(urlDto.originalUrl());
     }
