@@ -2,7 +2,7 @@ package ir.javaclass.demo.controller;
 
 import ir.javaclass.demo.exception.DataNotFoundException;
 import ir.javaclass.demo.model.dto.UrlDto;
-import ir.javaclass.demo.service.UrlService;
+import ir.javaclass.demo.service.UrlServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UrlController {
 
-    private final UrlService urlService;
+    private final UrlServiceImpl urlService;
 
     @PostMapping("/shorten")
     public ResponseEntity<UrlDto> createShortUrl(@RequestParam String originalUrl) {
