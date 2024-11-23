@@ -15,12 +15,11 @@ import org.springframework.stereotype.Service;
 public class UrlServiceImpl implements UrlService {
     private final AppConfig appConfig;
     private final UrlRepository urlRepository;
-    private final RandomGenerator randomGenerator;
     private final UrlMapper urlMapper;
 
     @Override
     public UrlDto createShortUrl(String originalUrl) {
-        String shortUrl = randomGenerator.generateShortCode(appConfig.getMaxLength());
+        String shortUrl = RandomUtil.generateShortCode(appConfig.getMaxLength(), appConfig.getRandomChars());
         UrlEntity urlEntity = UrlEntity.builder()
                 .originalUrl(originalUrl)
                 .shortUrl(appConfig.getBaseUrl() + shortUrl)
