@@ -8,6 +8,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * UrlController class for define endpoint for manage url services
+ *
+ * @author Mostafa Anbarmoo
+ */
+
 @RestController
 @RequestMapping("/api/v1/url")
 @RequiredArgsConstructor

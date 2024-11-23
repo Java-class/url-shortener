@@ -58,7 +58,7 @@ public class UrlControllerIntegrationTest {
 
 
     @Test
-    void testCreateShortUrl() throws Exception {
+    void testCreateShortUrl_success() throws Exception {
         mockMvc.perform(post("/api/v1/url/shorten")
                         .param("originalUrl", originalUrl)
                         .contentType(MediaType.APPLICATION_JSON))
@@ -68,7 +68,14 @@ public class UrlControllerIntegrationTest {
     }
 
     @Test
-    void testGetOriginalUrl() throws Exception {
+    void testCreateShortUrl_invalidRequest() throws Exception {
+        mockMvc.perform(post("/api/v1/url/shorten")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testGetOriginalUrl_success() throws Exception {
         // First, create a short URL
         var result = mockMvc.perform(post("/api/v1/url/shorten")
                         .param("originalUrl", originalUrl)
@@ -84,6 +91,21 @@ public class UrlControllerIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string(originalUrl));
+    }
+
+    @Test
+    void testGetOriginalUrl_notFound() throws Exception {
+        mockMvc.perform(get("/api/v1/url/original")
+                        .param("shortUrl", "notFoundUrl")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isMovedPermanently());
+    }
+
+    @Test
+    void testGetOriginalUrl_invalidRequest() throws Exception {
+        mockMvc.perform(get("/api/v1/url/original")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
     }
 
     @AfterAll

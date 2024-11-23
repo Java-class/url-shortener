@@ -13,6 +13,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * RestResponseEntityExceptionHandler class for handle exceptions
+ *
+ * @author Mostafa Anbarmoo
+ */
 
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {

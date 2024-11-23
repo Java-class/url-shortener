@@ -13,6 +13,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * UrlService class for manage create and retrieve urls
+ *
+ * @author Mostafa Anbarmoo
+ */
 
 @Service
 @RequiredArgsConstructor
