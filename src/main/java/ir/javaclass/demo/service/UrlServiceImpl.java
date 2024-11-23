@@ -38,10 +38,10 @@ public class UrlServiceImpl implements UrlService {
         return urlMapper.toUrlDto(urlEntity);
     }
 
-
     @Override
     @Cacheable(value = "url", key = "#shortUrl")
     public UrlDto getOriginalUrl(String shortUrl) throws DataNotFoundException {
+        shortUrl = shortUrl.replace(appConfig.getBaseUrl(), "");
         return urlRepository.findByShortUrl(appConfig.getBaseUrl() + shortUrl)
                 .map(urlMapper::toUrlDto)
                 .orElseThrow(DataNotFoundException::new);
