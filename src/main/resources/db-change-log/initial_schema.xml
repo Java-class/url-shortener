@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="init-db-2024-11-23-23-12" author="M.Anbarmoo">
+        <sql>
+            CREATE SEQUENCE url_seq increment by 1;
+
+            CREATE TABLE url (
+            id BIGINT not null DEFAULT nextval('url_seq')
+            primary key,
+            original_url VARCHAR(1000) NOT NULL UNIQUE,
+            short_url VARCHAR(255) NOT NULL UNIQUE,
+            creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+
+            ALTER SEQUENCE url_seq
+            OWNED BY url.id;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

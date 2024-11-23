@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "url")
 @Getter
 @Setter
 @Builder
@@ -19,10 +20,12 @@ public class UrlEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank(message = "original url is mandatory")
+    @Column(name = "original_url", nullable = false)
     private String originalUrl;
     @NotBlank(message = "short url is mandatory")
-    @Column(unique = true)
+    @Column(name = "short_url", unique = true, nullable = false)
     private String shortUrl;
     @CreationTimestamp
+    @Column(name = "creation_date")
     private LocalDateTime creationDate;
 }
