@@ -34,6 +34,14 @@ For run this project, you must do flowing steps:
 ```http
 curl --location 'http://localhost:8080/api/v1/url/shorten' \
 --form 'originalUrl="https://java-class.ir/about"'
+
+Response sample:
+{
+    "originalUrl": "https://java-class.ir/about",
+    "shortUrl": "http://short.url/6KGEGoGlIC",
+    "creationDate": "2024-11-23T22:40:45.975537"
+}
+
 ```
 
 - Get the original url
