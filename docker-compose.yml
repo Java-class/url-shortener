@@ -1,0 +1,54 @@
+services:
+  java:
+    depends_on:
+      postgres_db:
+        condition: service_started
+      redis_db:
+        condition: service_healthy
+    image: openjdk:21
+    volumes:
+      - ./:/app
+    command: bash -c "cd /app && java -jar target/url-shortener-1.0.0.jar --port=8080"
+    ports:
+      - "8080:8080"
+    container_name: url_shortener
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=12345ma
+      - SPRING_DATA_REDIS_HOST=redis_db
+      - SPRING_DATA_REDIS_PORT=6379
+    networks:
+      - app_network
+
+  postgres_db:
+    image: "postgres:latest"
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345ma
+    ports:
+      - "5432:5432"
+    networks:
+      - app_network
+  redis_db:
+    image: "redis:latest"
+    container_name: redis_db
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_db:/data
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 1s
+      timeout: 1s
+      retries: 1
+    networks:
+      - app_network
+volumes:
+  redis_db:
+    driver: local
+
+networks:
+  app_network:
+    driver: bridge

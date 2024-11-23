@@ -1,4 +1,4 @@
-package ir.javaclass.demo.service;
+package ir.javaclass.demo.util;
 
 import org.apache.commons.lang3.RandomStringUtils;
 

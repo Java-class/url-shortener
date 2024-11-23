@@ -8,6 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface UrlRepository extends JpaRepository<UrlEntity, Long> {
+    Optional<UrlEntity> findByOriginalUrl(String originalUrl);
     Optional<UrlEntity> findByShortUrl(String shortUrl);
 }
 

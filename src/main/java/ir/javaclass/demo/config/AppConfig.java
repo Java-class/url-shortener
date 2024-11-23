@@ -14,3 +14,4 @@ public class AppConfig {
     private int maxLength;
     private String randomChars;
 }
+

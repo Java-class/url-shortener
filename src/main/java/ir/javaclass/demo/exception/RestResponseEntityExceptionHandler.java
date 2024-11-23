@@ -22,7 +22,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
             Exception ex, WebRequest request) {
         if (ex instanceof DataNotFoundException) {
             return new ResponseEntity<Object>(
-                    ex.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND);
+                    ex.getMessage(), new HttpHeaders(), HttpStatus.MOVED_PERMANENTLY);
         } else if (ex instanceof MethodArgumentNotValidException) {
             return new ResponseEntity<Object>(
                     handleValidationExceptions((MethodArgumentNotValidException) ex), new HttpHeaders(), HttpStatus.BAD_REQUEST);
