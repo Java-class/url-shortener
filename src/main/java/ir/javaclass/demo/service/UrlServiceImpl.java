@@ -22,7 +22,6 @@ public class UrlServiceImpl implements UrlService {
     private final UrlMapper urlMapper;
 
     @Override
-    //@CachePut(value = "url", key = "#shortUrl")
     public UrlDto createShortUrl(String originalUrl) {
         UrlEntity urlEntity;
         Optional<UrlEntity> history = urlRepository.findByOriginalUrl(originalUrl);
